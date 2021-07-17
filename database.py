@@ -1,7 +1,6 @@
+# The Database that stores the information for all the transaction
 from collections import deque
-
 from flask import jsonify
-
 from transaction_entity import TransactionEntity
 
 

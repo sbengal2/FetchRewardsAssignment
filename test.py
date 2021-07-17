@@ -1,13 +1,13 @@
-from flask import Flask
-import json
-import requests
 from routes import app
 import uuid
-
+# The tester is used to test the various routes of the application.
+# The assertion can be added to the returned data if the output is already known
 
 class Tester:
+    # id generated for the user
     id = uuid.uuid4()
 
+    # Tests if the service is active
     def test_base_route(self):
         client = app.test_client()
         url = '/'
@@ -16,6 +16,7 @@ class Tester:
         assert response.status_code == 200
         print("SERVER ACTIVE")
 
+    # Tests if the transaction module is working
     def test_post_route__success(self):
         client = app.test_client()
         url = "http://127.0.0.1:5000/points/user/{}/transaction".format(id)
@@ -47,6 +48,7 @@ class Tester:
         print("ALL PAYER POINTS ADDED SUCCESSFULLY")
         self.test_balance()
 
+    # Tests if the balance module is working
     def test_balance(self):
         client = app.test_client()
         url = "http://127.0.0.1:5000/points/user/{}/balances".format(id)
@@ -54,6 +56,7 @@ class Tester:
         assert response.status_code == 200
         print(response.json)
 
+    # Tests if the spending module is working
     def test_spending(self):
         client = app.test_client()
         url = "http://127.0.0.1:5000/points/user/{}/spend".format(id)
